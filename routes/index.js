@@ -12,6 +12,10 @@ const institucionalController = require('../controllers/institucionalController'
 // Rotas para páginas institucionais (Trabalhe Conosco, Sobre, etc)
 // (1) http://localhost:3000/
 router.get('/', institucionalController.index)
+// (2) http://localhost:3000/sobre
+router.get('/sobre', institucionalController.sobre);
+// (3) http://localhost:3000/contato
+router.get('/contato', institucionalController.contato)
 
 // Rota para '/pets' que retorna o método index da petsController
 router.get('/pets', petsController.index)

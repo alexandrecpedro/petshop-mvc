@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    width: 1080px;
+    width: 1150px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -144,7 +144,7 @@ section.sobre .text p {
 
 footer {
     background-color: #FFBE51;
-    padding: 50px;
+    padding: 30px;
 }
 
 footer .info {
