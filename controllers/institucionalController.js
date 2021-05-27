@@ -7,6 +7,9 @@ const institucionalController = {
     sobre: (request, response) => {
         return response.render('sobre', { titulo: 'Sobre' });
     },
+    servicos: (request, response) => {
+        return response.render('servicos', { titulo: 'Serviços' });
+    },
     contato: (request, response) => {
         return response.render('contato', { titulo: 'Contato' });
     }
