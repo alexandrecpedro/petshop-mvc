@@ -1,1 +1,9 @@
-[{"id":"0a204ced-d6c3-4073-b024-a2510fe2f5ae","nome":"Banho e tosa","descricao":"banho completo, tosa básica","preco":"49","ilustracao":""}]
+[
+    {
+        "id": "0a204ced-d6c3-4073-b024-a2510fe2f5ae",
+        "nome": "Banho e tosa",
+        "descricao": "banho completo, tosa básica",
+        "preco": "49",
+        "ilustracao": ""
+    }
+]
