@@ -24,8 +24,10 @@ const servicosController = {
     },
     // método SALVAR - recebe informações enviadas e as salva
     salvar: (request, response) => {
-        let { nome, descricao, preco, ilustracao } = request.body
+        let { nome, descricao, preco } = request.body
 
+        // Pegando o nome do arquivo (upload)
+        let ilustracao = request.file.path
         // Adiciona o novo serviço no array
         servicos.push({ id: uuid(), nome, descricao, preco, ilustracao })
         // Converter o array para json
