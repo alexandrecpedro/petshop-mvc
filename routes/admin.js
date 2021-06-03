@@ -36,10 +36,20 @@ router.get('/', (req, res, next) => {
 router.get('/servicos', servicosController.index);
 // (3) http://localhost:3000/admin/servicos/cadastro
 router.get('/servicos/cadastro', servicosController.cadastro);
+// (4) http://localhost:3000/admin/servicos/editar
+router.get('/servicos/editar/:id', servicosController.editar);
 
 // B) MÉTODO POST
 // (1) http://localhost:3000/admin/servicos/cadastro
 router.post('/servicos/cadastro', upload.single('ilustracao'), servicosController.salvar);
+
+// C) MÉTODO PUT
+// (1) http://localhost:3000/admin/servicos/editar/:id/?_method=PUT
+router.put('/servicos/editar/:id', upload.single('ilustracao'), servicosController.atualizar);
+
+// D) MÉTODO DELETE
+// (1) http://localhost:3000/admin/servicos/excluir
+router.delete('/servicos/excluir/:id', upload.single('ilustracao'), servicosController.deletar);
 
 // Exportando rotas a serem utilizadas
 module.exports = router;

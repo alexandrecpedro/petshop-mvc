@@ -27,7 +27,7 @@ const servicosController = {
         let { nome, descricao, preco } = request.body
 
         // Pegando o nome do arquivo (upload)
-        let ilustracao = request.file.path
+        let ilustracao = request.file.filename
         // Adiciona o novo serviço no array
         servicos.push({ id: uuid(), nome, descricao, preco, ilustracao })
         // Converter o array para json
@@ -38,11 +38,54 @@ const servicosController = {
         // Redireciona para a lista de serviços
         return response.redirect('/admin/servicos')
     },
-    // método SHOW - exibe informações de cada pet
-    show: (request, response) => {
-        // pegando parâmetro nome da rota 'pets/:nome'
-        const {nome} = request.params;
-        return response.send(`Exibindo detalhes do serviço ${nome}`);
+    // método EDITAR - altera informações de cada serviço
+    editar: (request, response) => {
+        // Pegando parâmetro ID da URL
+        let { id } = request.params
+        // Busca serviço pelo ID
+        let servicoEncontrado = servicos.find(servico => servico.id == id)
+        // Renderiza view e manda título e objeto do serviço
+        return response.render('servicosEditar', { titulo: 'Editar Serviço', servico: servicoEncontrado })
+    },
+    // método ATUALIZAR
+    atualizar: (request, response) => {
+        // Pegando parâmetro ID da URL
+        let { id } = request.params
+        // Pegando informações do formulário
+        let { nome, descricao, preco } = request.body
+        // Busca serviço pelo ID
+        let servicoEncontrado = servicos.find(servico => servico.id == id)
+        // Atribuindo os novos valores ao servicoEncontrado
+        servicoEncontrado.nome = nome;
+        servicoEncontrado.descricao = descricao;
+        servicoEncontrado.preco = preco;
+        // Verificando se usuário subiu um novo arquivo (nova imagem)
+        if (request.file) {
+            servicoEncontrado.ilustracao = request.file.filename
+        }
+
+        // Converter o array para json
+        let dadosJson = JSON.stringify(servicos)
+        // Salva json atualizado no arquivo
+        fs.writeFileSync(servicosPath, dadosJson)
+        
+        // Redireciona para a lista de serviços
+        return response.redirect('/admin/servicos')
+    },
+    deletar: (request, response) => {
+        // Pegando parâmetro ID da URL
+        let { id } = request.params
+        // Busca serviço pelo ID
+        let servicoIndex = servicos.findIndex(servico => servico.id == id)
+        servicos.splice(servicoIndex, 1)
+
+        // Converter o array para json
+        let dadosJson = JSON.stringify(servicos)
+        // Salva json atualizado no arquivo
+        fs.writeFileSync(servicosPath, dadosJson)
+        
+        // Redireciona para a lista de serviços
+        return response.redirect('/admin/servicos')
     }
 }
 
