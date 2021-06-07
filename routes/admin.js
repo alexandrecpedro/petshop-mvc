@@ -8,6 +8,8 @@ const path = require('path');
 const router = express.Router();
 // Chama o controller servicosController
 const servicosController = require('../controllers/servicosController');
+// Chama middleware - validação de serviço
+const validacaCadastroServico = require('../middlewares/validacao/servico');
 
 // Configurações do Multer
 const storage = multer.diskStorage({
@@ -41,7 +43,7 @@ router.get('/servicos/editar/:id', servicosController.editar);
 
 // B) MÉTODO POST
 // (1) http://localhost:3000/admin/servicos/cadastro
-router.post('/servicos/cadastro', upload.single('ilustracao'), servicosController.salvar);
+router.post('/servicos/cadastro', upload.single('ilustracao'), validacaCadastroServico, servicosController.salvar);
 
 // C) MÉTODO PUT
 // (1) http://localhost:3000/admin/servicos/editar/:id/?_method=PUT
