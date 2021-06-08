@@ -47,11 +47,11 @@ router.post('/servicos/cadastro', upload.single('ilustracao'), validacaCadastroS
 
 // C) MÉTODO PUT
 // (1) http://localhost:3000/admin/servicos/editar/:id/?_method=PUT
-router.put('/servicos/editar/:id', upload.single('ilustracao'), servicosController.atualizar);
+router.put('/servicos/editar/:id', upload.single('ilustracao'), validacaCadastroServico, servicosController.atualizar);
 
 // D) MÉTODO DELETE
 // (1) http://localhost:3000/admin/servicos/excluir
-router.delete('/servicos/excluir/:id', upload.single('ilustracao'), servicosController.deletar);
+router.delete('/servicos/excluir/:id', servicosController.deletar);
 
 // Exportando rotas a serem utilizadas
 module.exports = router;
