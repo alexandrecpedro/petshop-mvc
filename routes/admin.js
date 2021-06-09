@@ -9,7 +9,7 @@ const router = express.Router();
 // Chama o controller servicosController
 const servicosController = require('../controllers/servicosController');
 // Chama middleware - validação de serviço
-const validacaCadastroServico = require('../middlewares/validacao/servico');
+const validaCadastroServico = require('../middlewares/validacao/servico');
 
 // Configurações do Multer
 const storage = multer.diskStorage({
@@ -40,17 +40,19 @@ router.get('/servicos', servicosController.index);
 router.get('/servicos/cadastro', servicosController.cadastro);
 // (4) http://localhost:3000/admin/servicos/editar
 router.get('/servicos/editar/:id', servicosController.editar);
+// (5) http://localhost:3000/admin/servicos/excluir/:id
+router.get('/servicos/excluir/:id', servicosController.excluir);
 
 // B) MÉTODO POST
 // (1) http://localhost:3000/admin/servicos/cadastro
-router.post('/servicos/cadastro', upload.single('ilustracao'), validacaCadastroServico, servicosController.salvar);
+router.post('/servicos/cadastro', upload.single('ilustracao'), validaCadastroServico, servicosController.salvar);
 
 // C) MÉTODO PUT
 // (1) http://localhost:3000/admin/servicos/editar/:id/?_method=PUT
-router.put('/servicos/editar/:id', upload.single('ilustracao'), validacaCadastroServico, servicosController.atualizar);
+router.put('/servicos/editar/:id', upload.single('ilustracao'), validaCadastroServico, servicosController.atualizar);
 
 // D) MÉTODO DELETE
-// (1) http://localhost:3000/admin/servicos/excluir
+// (1) http://localhost:3000/admin/servicos/excluir/:id
 router.delete('/servicos/excluir/:id', servicosController.deletar);
 
 // Exportando rotas a serem utilizadas

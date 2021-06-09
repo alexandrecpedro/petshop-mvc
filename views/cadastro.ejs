@@ -1,5 +1,19 @@
 <%- include('./partials/header'); %>
-<main>
-    <!-- aqui vem o cadastro -->
+
+<main class="login">
+    <div class="container">
+        <img src="/img/ilustra-user.png" alt="Ilustração de pessoa no sofá com gato">
+        <div class="box-white">
+            <h1>Cadastre-se</h1>
+            <form action="/login" method="post">
+                <input type="text" placeholder="nome" name="nome">
+                <input type="text" placeholder="email" name="email">
+                <input type="password" placeholder="senha" name="senha">
+                <input type="password" placeholder="confirmar senha" name="confirmar senha">
+                <button class="btn btn-primary">enviar</button>
+                <a href="/login">já tenho cadastro</a>
+            </form>
+        </div>
+    </div>
 </main>
 <%- include('./partials/footer'); %>

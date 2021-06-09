@@ -1,0 +1,29 @@
+<%- include('./partials/header'); %>
+<main class="admin">
+    <div class="container">
+        <h1>Painel Administrativo</h1>
+        <a href="/admin/servicos"> voltar para lista de serviços</a>
+        <% if(typeof servico !== 'undefined'){ %>
+        <form action="/admin/servicos/excluir/<%= servico.id %>?_method=DELETE" method="POST"
+            enctype="multipart/form-data">
+            <fieldset>
+                <legend>Excluir Serviço</legend>
+                <input type="hidden" name="id" value="<%= servico.id %>">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" value="<%= servico.nome %>" readonly disabled>
+                <label for="descricao">Descrição</label>
+                <textarea name="descricao" id="descricao" readonly disabled><%= servico.descricao %></textarea>
+                <label for="preco">Preço</label>
+                <input type="number" name="preco" id="preco" value="<%= servico.preco %>" readonly disabled>
+                <% if(servico.ilustracao) { %>
+                <label for="ilustracao">Ilustração</label>
+                <img src="/uploads/<%= servico.ilustracao %>" class="thumb-preview"
+                    alt="Ilustracao de <%= servico.nome %> ">
+                <% } %>
+                <button type="submit" class="btn btn-red">Excluir definitivamente</button>
+            </fieldset>
+        </form>
+        <% } %>
+    </div>
+</main>
+<%- include('./partials/footer'); %>

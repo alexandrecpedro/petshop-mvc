@@ -156,3 +156,7 @@ O usuário acessou a url: /favicon.ico
 O usuário acessou a url: /admin/servicos/excluir/5978de0a-76b8-49d6-94fb-63ddf3f3aea1 
 O usuário acessou a url: /admin/servicos/excluir/5978de0a-76b8-49d6-94fb-63ddf3f3aea1 
 O usuário acessou a url: /admin/servicos/excluir/5978de0a-76b8-49d6-94fb-63ddf3f3aea1 
+O usuário acessou a url: / 
+O usuário acessou a url: /admin/servicos 
+O usuário acessou a url: /admin/servicos/excluir/5978de0a-76b8-49d6-94fb-63ddf3f3aea1 
+O usuário acessou a url: /admin/servicos/excluir/5978de0a-76b8-49d6-94fb-63ddf3f3aea1 

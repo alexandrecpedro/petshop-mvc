@@ -18,6 +18,10 @@ router.get('/sobre', institucionalController.sobre);
 router.get('/contato', institucionalController.contato)
 // (4) Rota para '/servicos' que retorna o método servicos da institucionalController
 router.get('/servicos', institucionalController.servicos)
+// (5) http://localhost:3000/login
+router.get('/login', institucionalController.login);
+// (6) http://localhost:3000/cadastro
+router.get('/cadastro', institucionalController.cadastro);
 
 // Rota para '/pets' que retorna o método index da petsController
 router.get('/pets', petsController.index)

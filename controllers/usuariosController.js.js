@@ -12,15 +12,15 @@ let servicos = fs.readFileSync(servicosPath, { encoding: 'utf-8'})
 // Convertendo arquivo JSON em um array - Método Parse
 servicos = JSON.parse(servicos)
 
-const servicosController = {
+const usuariosController = {
     // métodos dentro do objeto
     // método INDEX - exibe a lista dos servicos
     index: (request, response) => {
-        // Renderiza a view adminServicos e passa informações dinâmicas
-        return response.render('adminServicos', { titulo: 'Serviços', servicos })
+        // Renderiza a view adminUsuarios e passa informações dinâmicas
+        return response.render('adminUsuarios', { titulo: 'Serviços', usuarios })
     },
     cadastro: (request, response) => {
-        return response.render('servicosCadastro', { titulo: 'Cadastrar Serviço' })
+        return response.render('usuariosCadastro', { titulo: 'Cadastrar Serviço' })
     },
     // método SALVAR - recebe informações enviadas e as salva
     salvar: (request, response) => {
@@ -29,23 +29,23 @@ const servicosController = {
         // Pegando o nome do arquivo (upload)
         let ilustracao = request.file.filename
         // Adiciona o novo serviço no array
-        servicos.push({ id: uuid(), nome, descricao, preco, ilustracao })
+        usuarios.push({ id: uuid(), nome, descricao, preco, ilustracao })
         // Converter o array para json
-        let dadosJson = JSON.stringify(servicos)
+        let dadosJson = JSON.stringify(usuarios)
         // Salva json atualizado no arquivo
-        fs.writeFileSync(servicosPath, dadosJson)
+        fs.writeFileSync(usuariosPath, dadosJson)
         
         // Redireciona para a lista de serviços
-        return response.redirect('/admin/servicos')
+        return response.redirect('/admin/usuarios')
     },
     // método EDITAR - altera informações de cada serviço
     editar: (request, response) => {
         // Pegando parâmetro ID da URL
         let { id } = request.params
         // Busca serviço pelo ID
-        let servicoEncontrado = servicos.find(servico => servico.id == id)
+        let servicoEncontrado = usuarios.find(servico => servico.id == id)
         // Renderiza view e manda título e objeto do serviço
-        return response.render('servicosEditar', { titulo: 'Editar Serviço', servico: servicoEncontrado })
+        return response.render('usuariosEditar', { titulo: 'Editar Serviço', servico: servicoEncontrado })
     },
     // método ATUALIZAR
     atualizar: (request, response) => {
@@ -54,7 +54,7 @@ const servicosController = {
         // Pegando informações do formulário
         let { nome, descricao, preco } = request.body
         // Busca serviço pelo ID
-        let servicoEncontrado = servicos.find(servico => servico.id == id)
+        let servicoEncontrado = usuarios.find(servico => servico.id == id)
         // Atribuindo os novos valores ao servicoEncontrado
         servicoEncontrado.nome = nome;
         servicoEncontrado.descricao = descricao;
@@ -65,17 +65,17 @@ const servicosController = {
         }
 
         // Converter o array para json
-        let dadosJson = JSON.stringify(servicos)
+        let dadosJson = JSON.stringify(usuarios)
         // Salva json atualizado no arquivo
-        fs.writeFileSync(servicosPath, dadosJson)
+        fs.writeFileSync(usuariosPath, dadosJson)
         
         // Redireciona para a lista de serviços
-        return response.redirect('/admin/servicos')
+        return response.redirect('/admin/usuarios')
     },
     excluir: (request, response) => {
         let {id} = request.params;
 
-        let servicoEncontrado = servicos.find((servico) => servico.id == id);
+        let servicoEncontrado = usuarios.find((servico) => servico.id == id);
 
         return response.render('servicosExcluir', { titulo: 'Excluir Serviço', servico: servicoEncontrado });
     },
@@ -83,17 +83,17 @@ const servicosController = {
         // Pegando parâmetro ID da URL
         let { id } = request.params
         // Busca serviço pelo ID
-        let servicoIndex = servicos.findIndex(servico => servico.id == id)
-        servicos.splice(servicoIndex, 1)
+        let servicoIndex = usuarios.findIndex(servico => servico.id == id)
+        usuarios.splice(servicoIndex, 1)
 
         // Converter o array para json
-        let dadosJson = JSON.stringify(servicos)
+        let dadosJson = JSON.stringify(usuarios)
         // Salva json atualizado no arquivo
-        fs.writeFileSync(servicosPath, dadosJson)
+        fs.writeFileSync(usuariosPath, dadosJson)
         
         // Redireciona para a lista de serviços
-        return response.redirect('/admin/servicos')
+        return response.redirect('/admin/usuarios')
     }
 }
 
-module.exports = servicosController
+module.exports = usuariosController
