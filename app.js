@@ -7,6 +7,8 @@ var logger = require('morgan');
 const methodOverride = require('method-override');
 // Importando middleware
 const middlewareLog = require('./middlewares/log');
+// Importando módulo Express-Session
+const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -29,9 +31,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 // Middlewares globais
 app.use(middlewareLog);
+app.use(session({
+  secret:'petshop-express', 
+  resave: false, 
+  saveUninitialized: true}));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
 app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler

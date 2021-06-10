@@ -158,7 +158,6 @@ section.servicos .items .thumb {
     width: 100%;
     height: 200px;
     background-color: #fff;
-    background-size: cover;
 }
 
 section.sobre {
@@ -229,8 +228,10 @@ section.servicos-lista article .thumb {
     max-width: 100%;
     width: 250px;
     height: 250px;
-    background-color: #555;
+    background-color: #fff;
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     margin: 0 30px 30px;
 }
 
@@ -277,7 +278,7 @@ form fieldset {
 
 form textarea {
     resize: none;
-    height: 100px;
+    height: 300px;
 }
 
 form label {
@@ -328,9 +329,4 @@ table th,
 table td {
     border: 1px solid #ccc;
     padding: 10px;
-}
-
-.thumb-preview {
-    width: 300px;
-    display: block;
 }

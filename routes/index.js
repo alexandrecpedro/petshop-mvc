@@ -23,9 +23,6 @@ router.get('/login', institucionalController.login);
 // (6) http://localhost:3000/cadastro
 router.get('/cadastro', institucionalController.cadastro);
 
-// Rota para '/pets' que retorna o método index da petsController
-router.get('/pets', petsController.index)
-// Rota para '/pets/:nome' que retorna o método show da petsController
-router.get('/pets/:nome', petsController.show)
+
 
 module.exports = router;

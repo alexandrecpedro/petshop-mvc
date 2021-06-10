@@ -10,6 +10,8 @@ const router = express.Router();
 const servicosController = require('../controllers/servicosController');
 // Chama middleware - validação de serviço
 const validaCadastroServico = require('../middlewares/validacao/servico');
+// Chama middleware - validação de usuário
+const validaUsuario = require('../middlewares/auth');
 
 // Configurações do Multer
 const storage = multer.diskStorage({
@@ -35,7 +37,7 @@ router.get('/', (req, res, next) => {
     res.render('admin', { titulo: 'Painel Administrativo' });
 });
 // (2) http://localhost:3000/admin/servicos
-router.get('/servicos', servicosController.index);
+router.get('/servicos', validaUsuario, servicosController.index);
 // (3) http://localhost:3000/admin/servicos/cadastro
 router.get('/servicos/cadastro', servicosController.cadastro);
 // (4) http://localhost:3000/admin/servicos/editar

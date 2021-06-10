@@ -1,18 +1,27 @@
 <%- include('./partials/header'); %>
 
-<main class="login">
+<main>
     <div class="container">
-        <img src="/img/ilustra-user.png" alt="Ilustração de pessoa no sofá com gato">
+        <img src="/images/ilustra-user.png" alt="Ilustração de ficha cadastral">
         <div class="box-white">
             <h1>Cadastre-se</h1>
-            <form action="/login" method="post">
-                <input type="text" placeholder="nome" name="nome">
-                <input type="text" placeholder="email" name="email">
-                <input type="password" placeholder="senha" name="senha">
-                <input type="password" placeholder="confirmar senha" name="confirmar senha">
+
+            <form action="/cadastro" method="post">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome">
+
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email">
+
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha">
+
+                <label for="confirmar senha">Confirmar Senha</label>
+                <input type="password" name="confirmar senha" id="confirmar senha">
+
                 <button class="btn btn-primary">enviar</button>
-                <a href="/login">já tenho cadastro</a>
             </form>
+            <a href="/login">já tenho cadastro</a>
         </div>
     </div>
 </main>
