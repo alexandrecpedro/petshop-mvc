@@ -57,7 +57,6 @@ const usuariosController = {
             // Usuário não autenticado
             response.redirect('/login')
         }
-
     }
 }
 

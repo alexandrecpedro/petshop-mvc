@@ -14,6 +14,10 @@ servicos = JSON.parse(servicos)
 
 const servicosController = {
     // métodos dentro do objeto
+    // método PAINEL
+    painel: (req, res, next) => {
+        res.render('admin', { titulo: 'Painel Administrativo' });
+    },
     // método INDEX - exibe a lista dos servicos
     index: (request, response) => {
         // Renderiza a view adminServicos e passa informações dinâmicas

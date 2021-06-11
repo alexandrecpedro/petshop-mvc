@@ -11,7 +11,7 @@ const servicosController = require('../controllers/servicosController');
 // Chama middleware - validação de serviço
 const validaCadastroServico = require('../middlewares/validacao/servico');
 // Chama middleware - validação de usuário
-const validaUsuario = require('../middlewares/auth');
+const validaLogin = require('../middlewares/auth');
 
 // Configurações do Multer
 const storage = multer.diskStorage({
@@ -31,13 +31,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Rotas para páginas administrativas
-// A) MÉTODO GET
+// A) MÉTODO USE
+router.use(validaLogin);
+
+// B) MÉTODO GET
 // (1) http://localhost:3000/admin
-router.get('/', (req, res, next) => {
-    res.render('admin', { titulo: 'Painel Administrativo' });
-});
+router.get('/', servicosController.painel);
 // (2) http://localhost:3000/admin/servicos
-router.get('/servicos', validaUsuario, servicosController.index);
+router.get('/servicos', servicosController.index);
 // (3) http://localhost:3000/admin/servicos/cadastro
 router.get('/servicos/cadastro', servicosController.cadastro);
 // (4) http://localhost:3000/admin/servicos/editar
@@ -45,15 +46,15 @@ router.get('/servicos/editar/:id', servicosController.editar);
 // (5) http://localhost:3000/admin/servicos/excluir/:id
 router.get('/servicos/excluir/:id', servicosController.excluir);
 
-// B) MÉTODO POST
+// C) MÉTODO POST
 // (1) http://localhost:3000/admin/servicos/cadastro
 router.post('/servicos/cadastro', upload.single('ilustracao'), validaCadastroServico, servicosController.salvar);
 
-// C) MÉTODO PUT
+// D) MÉTODO PUT
 // (1) http://localhost:3000/admin/servicos/editar/:id/?_method=PUT
 router.put('/servicos/editar/:id', upload.single('ilustracao'), validaCadastroServico, servicosController.atualizar);
 
-// D) MÉTODO DELETE
+// E) MÉTODO DELETE
 // (1) http://localhost:3000/admin/servicos/excluir/:id
 router.delete('/servicos/excluir/:id', servicosController.deletar);
 
