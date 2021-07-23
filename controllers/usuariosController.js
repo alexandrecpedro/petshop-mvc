@@ -1,20 +1,23 @@
 // Importar módulo 'bcrypt' para criptografar senhas
 const bcrypt = require('bcrypt');
-// Instalação de módulo 'fs' para manipulação de arquivos
-const fs = require('fs')
+// // Instalação de módulo 'fs' para manipulação de arquivos
+// const fs = require('fs')
 // Módulo nativo para manipulação de arquivos
 const path = require('path')
 // Instalação de módulo 'uuidv4' para gerar ID
 const { uuid } = require('uuidv4')
-// // Importando módulo 'Express-Session' para criar session
+// Importando módulo 'Express-Session' para criar session
 const session = require('express-session')
+// Importando Usuário
+const { Usuario } = require('../database/models')
 
-// Caminho do arquivo JSON
-const usuariosPath = path.join('usuarios.json')
-// Pegando conteúdo do arquivo JSON
-let usuarios = fs.readFileSync(usuariosPath, { encoding: 'utf-8'})
-// Convertendo arquivo JSON em um array - Método Parse
-usuarios = JSON.parse(usuarios)
+
+// // Caminho do arquivo JSON
+// const usuariosPath = path.join('usuarios.json')
+// // Pegando conteúdo do arquivo JSON
+// let usuarios = fs.readFileSync(usuariosPath, { encoding: 'utf-8'})
+// // Convertendo arquivo JSON em um array - Método Parse
+// usuarios = JSON.parse(usuarios)
 
 const usuariosController = {
     // métodos dentro do objeto
@@ -23,16 +26,18 @@ const usuariosController = {
         return response.render('cadastro', { titulo: 'Cadastre-se' })
     },
     // método SALVAR - recebe informações enviadas e as salva
-    salvar: (request, response) => {
+    salvar: async (request, response) => {
         let { nome, email, senha } = request.body;
         const senhaCrypt = bcrypt.hashSync(senha, 10);
 
-         // Adiciona o novo usuario na lista para o JSON
-         usuarios.push({ id: uuid(), nome, email, senha: senhaCrypt })
-         // Converter o array para json
-         let dadosJson = JSON.stringify(usuarios)
-         // Salva json atualizado no arquivo
-         fs.writeFileSync(usuariosPath, dadosJson)
+        const novoUsuario = await Usuario.create({nome, email, senha: senhaCrypt});
+
+        //  // Adiciona o novo usuario na lista para o JSON
+        //  usuarios.push({ id: uuid(), nome, email, senha: senhaCrypt })
+        //  // Converter o array para json
+        //  let dadosJson = JSON.stringify(usuarios)
+        //  // Salva json atualizado no arquivo
+        //  fs.writeFileSync(usuariosPath, dadosJson)
          
          // Redireciona para a lista de serviços
          return response.redirect('/login')
@@ -43,10 +48,11 @@ const usuariosController = {
         return response.render('login', { titulo: 'Login' })
     },
     // método AUTENTICAÇÃO
-    autenticacao: (request, response) => {
+    autenticacao: async (request, response) => {
         const {email, senha} = request.body
         // Busca usuário pelo email
-        const usuarioEncontrado = usuarios.find(usuario => usuario.email == email)
+        const usuarioEncontrado = await Usuario.findOne({where: {email} })
+        // const usuarioEncontrado = usuarios.find(usuario => usuario.email == email)
         // Verificar se há usuário encontrado e se a senha está correta
         if (usuarioEncontrado && bcrypt.compareSync(senha, usuarioEncontrado.senha)) {
             // Usuário autenticado
