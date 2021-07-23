@@ -2,8 +2,8 @@
 const bcrypt = require('bcrypt');
 // // Instalação de módulo 'fs' para manipulação de arquivos
 // const fs = require('fs')
-// Módulo nativo para manipulação de arquivos
-const path = require('path')
+// // Módulo nativo para manipulação de arquivos
+// const path = require('path')
 // Instalação de módulo 'uuidv4' para gerar ID
 const { uuid } = require('uuidv4')
 // Importando módulo 'Express-Session' para criar session
